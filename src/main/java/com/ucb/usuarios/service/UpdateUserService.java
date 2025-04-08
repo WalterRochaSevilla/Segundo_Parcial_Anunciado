@@ -32,7 +32,6 @@ public class UpdateUserService implements Command<UpdateUserDto, UserDto> {
             User user = userOpt.get();
             UserDto.UpdateUser updateData = input.getUpdateData();
 
-            // Aplicar actualizaciones
             if (updateData.getName() != null) user.setName(updateData.getName());
             if (updateData.getEmail() != null) user.setEmail(updateData.getEmail());
             if (updateData.getPhone() != null) user.setPhone(updateData.getPhone());
@@ -41,8 +40,7 @@ public class UpdateUserService implements Command<UpdateUserDto, UserDto> {
             return ResponseEntity.ok(new UserDto(updatedUser));
 
         } catch (IllegalArgumentException e) {
-            return ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(new UserDto(e.getMessage()));
         }
     }
